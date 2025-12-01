@@ -1,0 +1,6 @@
+{
+  "name": "custom-nodes",
+  "version": "1.0.0",
+  "description": "Custom n8n nodes for Railway",
+  "dependencies": {}
+}
