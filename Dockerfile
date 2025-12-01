@@ -1,21 +1,20 @@
-# Imagen oficial de n8n
-FROM n8nio/n8n:latest
+FROM n8nio/n8n:latest-debian
+
+USER root
 
 # Instalar nodos comunitarios
-USER root
 RUN npm install -g \
     n8n-nodes-serpapi \
     n8n-nodes-upload-post \
     n8n-nodes-langchain
 
-# Asegurar permisos
-RUN mkdir -p /data && chown -R node:node /data
+# Crear carpeta de datos con permisos
+RUN mkdir -p /home/node/.n8n && chown -R node:node /home/node/.n8n
 
 USER node
-ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
-
 WORKDIR /home/node
 
-# Comando final compatible (sh en vez de bash)
-CMD ["sh", "-c", "/usr/local/bin/n8n"]
+ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
 
+# Ejecutar n8n (Railway necesita CMD explícito)
+CMD ["bash", "-c", "n8n"]
