@@ -8,14 +8,14 @@ RUN npm install -g \
     n8n-nodes-upload-post \
     n8n-nodes-langchain
 
-# Asegurar permisos del directorio
+# Asegurar permisos
 RUN mkdir -p /data && chown -R node:node /data
 
 USER node
 ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
 
-# Directorio de trabajo recomendado
 WORKDIR /home/node
 
-# Comando de inicio (ruta absoluta)
-CMD ["bash", "-c", "/usr/local/bin/n8n"]
+# Comando final compatible (sh en vez de bash)
+CMD ["sh", "-c", "/usr/local/bin/n8n"]
+
