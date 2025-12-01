@@ -1,22 +1,27 @@
-FROM n8nio/n8n:latest-debian
+# Última versión estable de n8n (con IA Agents y LLM Tools)
+FROM docker.io/n8nio/n8n:latest
 
-# Important: railway does not allow switching to USER node
+# Cambiamos al usuario root para permitir instalaciones
 USER root
 
-# instalar paquetes comunitarios
+# Instalar paquetes adicionales necesarios para tus flujos
 RUN npm install -g \
     n8n-nodes-serpapi \
     n8n-nodes-upload-post \
-    n8n-nodes-langchain
+    @n8n/n8n-nodes-langchain \
+    @n8n/n8n-nodes-ai \
+    @n8n/langchain-nodes
 
-# crear carpeta .n8n con permisos correctos
-RUN mkdir -p /home/node/.n8n && chmod -R 777 /home/node/.n8n
+# Permisos correctos para evitar errores en Railway
+RUN mkdir -p /home/node/.n8n && \
+    chown -R node:node /home/node
 
-# Variables para evitar errores de permisos
-ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
+# Regresar al usuario n8n para ejecutar con seguridad
+USER node
 
-# Puerto obligatorio
+# Exponer el puerto por defecto
 EXPOSE 5678
 
-# Iniciar n8n directamente como root
+# Comando de inicio
 CMD ["n8n"]
+
