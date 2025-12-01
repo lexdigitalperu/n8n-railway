@@ -1,6 +1,7 @@
-FROM docker.io/n8nio/n8n:latest
+FROM docker.io/n8nio/n8n:1.121.3
 
 USER root
+
 RUN npm install -g \
     n8n-nodes-serpapi \
     n8n-nodes-upload-post \
@@ -8,4 +9,5 @@ RUN npm install -g \
     @n8n/n8n-nodes-ai
 
 USER node
+
 ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
