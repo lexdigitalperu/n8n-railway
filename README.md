@@ -9,7 +9,7 @@ Este repo despliega n8n en Railway con nodos permanentes:
 ## Variables Railway
 
 - N8N_HOST=TU_DOMINIO.app
-- N8N_PORT=3000
+- N8N_PORT=5678
 - N8N_PROTOCOL=https
 - N8N_WEBHOOK_URL=https://TU_DOMINIO.app/
 - WEBHOOK_TUNNEL_URL=https://TU_DOMINIO.app/
